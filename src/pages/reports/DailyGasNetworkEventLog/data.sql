@@ -1,5 +1,5 @@
 /****** Script for SelectTopNRows command from SSMS  ******/
-SELECT TOP (1000) [EventID]
+SELECT [EventID]
       ,[Date]
       ,[Time]
       ,[ClientID]

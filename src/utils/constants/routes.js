@@ -8,7 +8,13 @@ const routes = {
     MONTHLY_PNV: () => "/reports/monthly_pnv",
   },
   API: {
+    GET_EVENTS: (params = undefined) => {
+      const searchParams = new URLSearchParams(params).toString();
+    
+      if (searchParams) return `/posts?${searchParams}`
 
+      return `/posts`
+    }
   }
 };
   
