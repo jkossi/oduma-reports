@@ -1,7 +1,7 @@
 const networkEventLogs = [
   {
     id: 1,
-    date: "21st March, 2022",
+    date: "2022-07-25T00:00:00",
     description: "Cenpower synchronised 1 steam unit off the grid.",
     time: "09:12 hrs",
     reason: "technical challenge resolved",
@@ -9,7 +9,7 @@ const networkEventLogs = [
   },
   {
     id: 2,
-    date: "21st March, 2022",
+    date: "2022-07-25T00:00:00",
     description: "Cenpower synchronised 1 steam unit off the grid.",
     time: "09:12 hrs",
     reason: "technical challenge resolved",
@@ -17,7 +17,7 @@ const networkEventLogs = [
   },
   {
     id: 3,
-    date: "21st March, 2022",
+    date: "2022-07-25T00:00:00",
     description: "Cenpower synchronised 1 steam unit off the grid.",
     time: "09:12 hrs",
     reason: "technical challenge resolved",
@@ -25,7 +25,7 @@ const networkEventLogs = [
   },
   {
     id: 4,
-    date: "21st March, 2022",
+    date: "2022-07-25T00:00:00",
     description: "Cenpower synchronised 1 steam unit off the grid.",
     time: "09:12 hrs",
     reason: "technical challenge resolved",

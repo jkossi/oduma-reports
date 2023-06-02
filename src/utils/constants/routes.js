@@ -11,9 +11,9 @@ const routes = {
     GET_EVENTS: (params = undefined) => {
       const searchParams = new URLSearchParams(params).toString();
     
-      if (searchParams) return `/posts?${searchParams}`
+      if (searchParams) return `/Events?${searchParams}`
 
-      return `/posts`
+      return `/Events`
     }
   }
 };

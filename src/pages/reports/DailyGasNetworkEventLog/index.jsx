@@ -123,9 +123,9 @@ function DailyGasNetworkEventLog() {
           </thead>
           <tbody>
             {networkEventLogs.map((log) => (
-              <tr key={log.id}>
+              <tr key={log.eventID}>
                 <td className="border border-slate-300 p-4 text-slate-500">
-                  {log.date}
+                  {format(new Date(log.date), "dd MMM, yyyy")}
                 </td>
                 <td className="border border-slate-300 p-4 text-slate-500">
                   {log.description}
@@ -137,7 +137,7 @@ function DailyGasNetworkEventLog() {
                   {log.reason}
                 </td>
                 <td className="border border-slate-300 p-4 text-slate-500">
-                  {log.updated_by}
+                  {log.updatedBy}
                 </td>
               </tr>
             ))}
