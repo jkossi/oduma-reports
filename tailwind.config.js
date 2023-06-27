@@ -9,6 +9,10 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter var']
+      },
+      colors: {
+        'dark-blue': "#002060ff",
+        'bright-yellow': " #ffc100ff",
       }
     },
   },
