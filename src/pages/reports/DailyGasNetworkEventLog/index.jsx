@@ -107,7 +107,7 @@ function DailyGasNetworkEventLog() {
           <thead>
             <tr>
               <th colspan="5" className="bg-dark-blue">
-                <div className="p-8 text-white">
+                <div className="p-3 text-white">
                   <h2 className=" text-2xl">GAS NETWORK EVENT LOG</h2>
                   {fromDate && toDate && (
                     <h3>
