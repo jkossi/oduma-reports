@@ -16,7 +16,10 @@ function DailyGasNetworkEventLog() {
   });
 
   const { fromDate, toDate, clientId } = useWatch({ control });
-  const { data, error, isLoading } = useSWR(routes.API.GET_EVENTS({ fromDate, toDate, clientId}), getEvents);
+  const { data, error, isLoading } = useSWR(
+    routes.API.GET_EVENTS({ fromDate, toDate, clientId }),
+    getEvents
+  );
 
   return (
     <section>
@@ -84,17 +87,16 @@ function DailyGasNetworkEventLog() {
       <hr className="mt-8" />
 
       {isLoading && (
-        <div className="text-center mt-5 text-sm text-gray-500">Loading...</div>
+        <div className="mt-5 text-center text-sm text-gray-500">Loading...</div>
       )}
       {!isLoading && error && (
-        <div className="text-xs text-center mt-5 text-red-500">
+        <div className="mt-5 text-center text-xs text-red-500">
           Sorry! we have a little problem. Refresh the page and try again...
         </div>
       )}
-      {data && (
-        <table className="mt-8 table-fixed border-collapse border border-slate-400">
+      {!data && (
+        <table className="mb-8 mt-8 table-fixed border-collapse border border-black">
           <caption className="caption-top py-4">
-            <h2 className="text-xl font-bold">Gas Network Event Log</h2>
             {fromDate && toDate && (
               <h3>{`${format(new Date(fromDate), "dd MMM, yyyy")} - ${format(
                 new Date(toDate),
@@ -104,39 +106,46 @@ function DailyGasNetworkEventLog() {
           </caption>
           <thead>
             <tr>
-              <th className="border border-slate-300 p-4 text-slate-500">
-                Date
+              <th colspan="5" className="bg-dark-blue">
+                <div className="p-8 text-white">
+                  <h2 className=" text-2xl">GAS NETWORK EVENT LOG</h2>
+                  {fromDate && toDate && (
+                    <h3>
+                      (
+                      {`${format(
+                        new Date(fromDate),
+                        "dd MMM, yyyy"
+                      )} - ${format(new Date(toDate), "dd MMM, yyyy")}`}
+                      )
+                    </h3>
+                  )}
+                </div>
               </th>
-              <th className="border border-slate-300 p-4 text-slate-500">
-                Description of Event
-              </th>
-              <th className="border border-slate-300 p-4 text-slate-500">
-                Time
-              </th>
-              <th className="border border-slate-300 p-4 text-slate-500">
-                Reason
-              </th>
-              <th className="border border-slate-300 p-4 text-slate-500">
-                Informing parties
-              </th>
+            </tr>
+            <tr className="bg-bright-yellow text-black">
+              <th className="border border-black">Date</th>
+              <th className="border border-black">Description of Event</th>
+              <th className="border border-black">Time</th>
+              <th className="border border-black">Reason</th>
+              <th className="border border-black">Informing parties</th>
             </tr>
           </thead>
           <tbody>
             {networkEventLogs.map((log) => (
               <tr key={log.eventID}>
-                <td className="border border-slate-300 p-4 text-slate-500">
+                <td className="border border-black p-4 text-black">
                   {format(new Date(log.date), "dd MMM, yyyy")}
                 </td>
-                <td className="border border-slate-300 p-4 text-slate-500">
+                <td className="border border-black p-2 text-black">
                   {log.description}
                 </td>
-                <td className="border border-slate-300 p-4 text-slate-500">
+                <td className="border border-black p-2 text-black">
                   {log.time}
                 </td>
-                <td className="border border-slate-300 p-4 text-slate-500">
+                <td className="border border-black p-2 text-black">
                   {log.reason}
                 </td>
-                <td className="border border-slate-300 p-4 text-slate-500">
+                <td className="border border-black p-2 text-black">
                   {log.updatedBy}
                 </td>
               </tr>
