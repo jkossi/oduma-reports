@@ -2,10 +2,10 @@ import { useForm, useWatch } from "react-hook-form";
 import { format } from "date-fns";
 import useSWR from "swr";
 import { getEvents } from "~/services/reportService";
-import networkEventLogs from "~/data/network_event_logs";
+import gasSchedulersLogs from "~/data/gas_schedulers_logs";
 import routes from "~/utils/constants/routes";
 
-function DailyGasNetworkEventLog() {
+function GasSchedulersLog() {
   const { register, handleSubmit, control } = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -22,13 +22,13 @@ function DailyGasNetworkEventLog() {
   );
 
   const onSubmit = (data) => {
-    console.log(data)
-  }
+    console.log(data);
+  };
 
   return (
     <section>
       <h1 className="text-2xl font-bold tracking-tight text-gray-900">
-        Daily Gas Network Event Log
+        Gas Schedulers Log
       </h1>
       <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
         <h2 className="mb-4">Filters</h2>
@@ -104,7 +104,7 @@ function DailyGasNetworkEventLog() {
             <tr>
               <th colSpan="5" className="bg-dark-blue">
                 <div className="p-3 text-white">
-                  <h2 className=" text-2xl">GAS NETWORK EVENT LOG</h2>
+                  <h2 className="text-2xl">GAS SCHEDULER'S REPORT</h2>
                   {fromDate && toDate && (
                     <h3>
                       (
@@ -119,30 +119,28 @@ function DailyGasNetworkEventLog() {
               </th>
             </tr>
             <tr className="bg-bright-yellow text-black">
-              <th className="border border-black">Date</th>
-              <th className="border border-black">Description of Event</th>
-              <th className="border border-black">Time</th>
-              <th className="border border-black">Reason</th>
-              <th className="border border-black">Informing parties</th>
+              <th className="border border-black">Gas Notices</th>
+              <th className="border border-black">Confirmation Date</th>
+              <th className="border border-black">Submitted Date</th>
+              <th className="border border-black">Comments</th>
             </tr>
           </thead>
           <tbody>
-            {networkEventLogs.map((log) => (
+            {gasSchedulersLogs.map((log) => (
               <tr key={log.eventID}>
+                <td className="border border-black p-2 text-black">
+                  {log.gasNotices}
+                </td>
                 <td className="border border-black p-4 text-black">
-                  {format(new Date(log.date), "dd MMM, yyyy")}
+                  {format(new Date(log.confirmationDate), "dd MMM, yyyy")}
+                </td>
+                <td className="border border-black p-4 text-black">
+                  {format(new Date(log.submittedDate), "dd MMM, yyyy")}
                 </td>
                 <td className="border border-black p-2 text-black">
-                  {log.description}
-                </td>
-                <td className="border border-black p-2 text-black">
-                  {log.time}
-                </td>
-                <td className="border border-black p-2 text-black">
-                  {log.reason}
-                </td>
-                <td className="border border-black p-2 text-black">
-                  {log.updatedBy}
+                  {log.comments.map((comment, index) => (
+                    <p className="pb-1" key={index}>- {comment}</p>
+                  ))}
                 </td>
               </tr>
             ))}
@@ -153,4 +151,4 @@ function DailyGasNetworkEventLog() {
   );
 }
 
-export default DailyGasNetworkEventLog;
+export default GasSchedulersLog;

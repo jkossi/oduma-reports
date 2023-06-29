@@ -17,6 +17,9 @@ function MainLayout() {
                 <Link to={routes.UI.DAILY_GAS_NETWORK_EVENT_LOG()}>Daily Gas Network Event Log</Link>  
               </li>
               <li className="py-1.5">
+                <Link to={routes.UI.GAS_SCHEDULERS_LOG()}>Gas Schedulers Log</Link>  
+              </li>
+              <li className="py-1.5">
                 <Link to={routes.UI.DAILY_BUYERS_NOTIFICATION()}>Daily Buyers Notification</Link>  
               </li>
               <li className="py-1.5">
