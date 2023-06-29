@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { getEvents } from "~/services/reportService";
 import networkEventLogs from "~/data/network_event_logs";
 import routes from "~/utils/constants/routes";
+import { toFormData } from "axios";
 
 function DailyGasNetworkEventLog() {
   const { register, handleSubmit, control } = useForm({
@@ -81,7 +82,7 @@ function DailyGasNetworkEventLog() {
                 <option value="">Select Client</option>
                 <option value="22">SAPP</option>
                 <option value="11">Jubilee</option>
-                <option value="p">Cenpower</option>
+                <option value="9">Cenpower</option>
               </select>
             </div>
           </div>
@@ -127,8 +128,8 @@ function DailyGasNetworkEventLog() {
             </tr>
           </thead>
           <tbody>
-            {networkEventLogs.map((log) => (
-              <tr key={log.eventID} className="text-center">
+            {data.map((log) => (
+              <tr key={log.eventID}>
                 <td width="10%" className="border border-black p-0.5 text-black">
                   {format(new Date(log.date), "dd MMM, yyyy")}
                 </td>

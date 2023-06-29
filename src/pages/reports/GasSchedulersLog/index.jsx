@@ -81,7 +81,7 @@ function GasSchedulersLog() {
                 <option value="">Select Client</option>
                 <option value="22">SAPP</option>
                 <option value="11">Jubilee</option>
-                <option value="p">Cenpower</option>
+                <option value="9">Cenpower</option>
               </select>
             </div>
           </div>
@@ -98,7 +98,7 @@ function GasSchedulersLog() {
           Sorry! we have a little problem. Refresh the page and try again...
         </div>
       )}
-      {!data && (
+      {true && (
         <table className="mb-8 mt-8 table-fixed border-collapse border border-black">
           <thead>
             <tr>
