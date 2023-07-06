@@ -20,6 +20,9 @@ function MainLayout() {
                 <Link to={routes.UI.BUYERS_DAILY_NOMINATION()}>Buyer&apos;s Daily Nomination</Link>  
               </li>
               <li className="py-1.5">
+                <Link to={routes.UI.DAILY_BUYERS_NOTIFICATION()}>Daily Buyers Notification</Link>  
+              </li>
+              <li className="py-1.5">
                 <Link to={routes.UI.MONTHLY_DVC_DECLARATION()}>Monthly DVC Declaration</Link>  
               </li>
               <li className="py-1.5">
