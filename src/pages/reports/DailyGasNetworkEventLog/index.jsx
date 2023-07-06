@@ -99,7 +99,7 @@ function DailyGasNetworkEventLog() {
         </div>
       )}
       {!data && (
-        <table className="mb-8 mt-8 table-fixed border-collapse border border-black">
+        <table className="mb-8 mt-8 table-fixed border-collapse border border-black" width="100%">
           <thead>
             <tr>
               <th colSpan="5" className="bg-dark-blue">
@@ -128,20 +128,20 @@ function DailyGasNetworkEventLog() {
           </thead>
           <tbody>
             {networkEventLogs.map((log) => (
-              <tr key={log.eventID}>
-                <td className="border border-black p-4 text-black">
+              <tr key={log.eventID} className="text-center">
+                <td width="10%" className="border border-black p-0.5 text-black">
                   {format(new Date(log.date), "dd MMM, yyyy")}
                 </td>
-                <td className="border border-black p-2 text-black">
+                <td width="40%" className="border border-black p-0.5 text-black">
                   {log.description}
                 </td>
-                <td className="border border-black p-2 text-black">
+                <td width="7%"className="border border-black p-0.5 text-black">
                   {log.time}
                 </td>
-                <td className="border border-black p-2 text-black">
+                <td className="border border-black p-0.5 text-black">
                   {log.reason}
                 </td>
-                <td className="border border-black p-2 text-black">
+                <td className="border border-black p-0.5 text-black">
                   {log.updatedBy}
                 </td>
               </tr>
