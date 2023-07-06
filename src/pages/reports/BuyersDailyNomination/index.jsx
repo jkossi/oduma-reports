@@ -2,10 +2,10 @@ import { useForm, useWatch } from "react-hook-form";
 import { format } from "date-fns";
 import useSWR from "swr";
 import { getEvents } from "~/services/reportService";
-import gasOfftakeRequestLogs from "~/data/gas_offtake_request_logs";
+import buyersDailyNominationLogs from "~/data/buyers_daily_nomination_logs";
 import routes from "~/utils/constants/routes";
 
-function DailyGasOfftakeRequest() {
+function BuyersDailyNomination() {
   const { register, handleSubmit, control } = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -28,7 +28,7 @@ function DailyGasOfftakeRequest() {
   return (
     <section>
       <h1 className="text-2xl font-bold tracking-tight text-gray-900">
-        Gas Offtake Request
+        Buyer&apos;s Daily Nomination
       </h1>
       <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
         <h2 className="mb-4">Filters</h2>
@@ -104,7 +104,7 @@ function DailyGasOfftakeRequest() {
             <tr>
               <th colSpan="4" className="bg-dark-blue">
                 <div className="p-3 text-white">
-                  <h2 className="text-2xl">Gas Offtake Request</h2>
+                  <h2 className="text-2xl">Buyer&apos;s Daily Nomination</h2>
                   {fromDate && toDate && (
                     <h3>
                       (
@@ -119,38 +119,41 @@ function DailyGasOfftakeRequest() {
               </th>
             </tr>
             <tr className="bg-bright-yellow text-black">
-              <th className="border border-black" width="13%">Date</th>
-              <th className="border border-black" width="20%">
-                <p>Requested Offtake</p>
-                <p>Quantity (MMBtu)</p>
-              </th>
-              <th className="border border-black" width="20%">
-                <p>Estimated Equivalent</p>
-                <p>Volumes (MMscfd)</p>
-              </th>
+              <th className="border border-black">Date</th>
+              <th className="border border-black">Seller Request</th>
+              <th className="border border-black">Total Buyer Nomination</th>
               <th className="border border-black">Comments</th>
             </tr>
           </thead>
           <tbody>
-            {gasOfftakeRequestLogs.map((log) => (
+            {buyersDailyNominationLogs.map((log) => (
               <tr key={log.eventID} className="text-center">
-                <td className="border p-0.5 border-black text-black" width="13%">
+                <td
+                  className="border border-black p-0.5 text-black"
+                  width="13%"
+                >
                   {format(new Date(log.submittedDate), "dd MMM, yyyy")}
                 </td>
-                <td className="border p-0.5 border-black text-black" width="20%">
+                <td
+                  className="border border-black p-0.5 text-black"
+                  width="20%"
+                >
                   {log.requested}
                 </td>
-                <td className="border p-0.5 border-black text-black" width="20%">
+                <td
+                  className="border border-black p-0.5 text-black"
+                  width="20%"
+                >
                   {log.estimated}
                 </td>
-                <td className="border p-0.5 border-black text-black"></td>
+                <td className="border border-black p-0.5 text-black"></td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
     </section>
-  )
+  );
 }
 
-export default DailyGasOfftakeRequest;
+export default BuyersDailyNomination;

@@ -17,19 +17,22 @@ function MainLayout() {
                 <Link to={routes.UI.DAILY_GAS_NETWORK_EVENT_LOG()}>Daily Gas Network Event Log</Link>  
               </li>
               <li className="py-1.5">
-                <Link to={routes.UI.GAS_SCHEDULERS_LOG()}>Gas Schedulers Log</Link>  
+                <Link to={routes.UI.BUYERS_DAILY_NOMINATION()}>Buyer&apos;s Daily Nomination</Link>  
               </li>
               <li className="py-1.5">
-                <Link to={routes.UI.DAILY_BUYERS_NOTIFICATION()}>Daily Buyers Notification</Link>  
-              </li>
-              <li className="py-1.5">
-                <Link to={routes.UI.DAILY_GAS_OPERATIONS()}>Daily Gas Operations</Link>  
+                <Link to={routes.UI.MONTHLY_DVC_DECLARATION()}>Monthly DVC Declaration</Link>  
               </li>
               <li className="py-1.5">
                 <Link to={routes.UI.DAILY_GAS_OFFTAKE_REQUEST()}>Daily Gas Offtake Request</Link>  
               </li>
               <li className="py-1.5">
-                <Link to={routes.UI.MONTHLY_DVC_DECLARATION()}>Monthly DVC Declaration</Link>  
+                <Link to={routes.UI.GAS_SCHEDULERS_LOG()}>Gas Schedulers Log</Link>  
+              </li>
+              <li className="py-1.5">
+                <Link to={routes.UI.DAILY_BUYERS_NOTIFICATION()}>Daily Buyer&apos;s Notification</Link>  
+              </li>
+              <li className="py-1.5">
+                <Link to={routes.UI.DAILY_GAS_OPERATIONS()}>Daily Gas Operations</Link>  
               </li>
               <li className="py-1.5">
                 <Link to={routes.UI.MONTHLY_PNV()}>Monthly PNV</Link>  

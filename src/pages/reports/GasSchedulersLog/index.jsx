@@ -104,7 +104,7 @@ function GasSchedulersLog() {
             <tr>
               <th colSpan="5" className="bg-dark-blue">
                 <div className="p-3 text-white">
-                  <h2 className="text-2xl">GAS SCHEDULER'S REPORT</h2>
+                  <h2 className="text-2xl">GAS SCHEDULER&apos;S REPORT</h2>
                   {fromDate && toDate && (
                     <h3>
                       (
