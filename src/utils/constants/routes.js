@@ -11,12 +11,26 @@ const routes = {
     MONTHLY_PNV: () => "/reports/monthly_pnv",
   },
   API: {
+    GET_CLIENTS: (params = undefined) => {
+      const searchParams = new URLSearchParams(params).toString();
+    
+      if (searchParams) return `/Clients?${searchParams}`
+
+      return `/Clients`
+    },
     GET_EVENTS: (params = undefined) => {
       const searchParams = new URLSearchParams(params).toString();
     
       if (searchParams) return `/Events?${searchParams}`
 
       return `/Events`
+    },
+    GET_NOMINATIONS: (params = undefined) => {
+      const searchParams = new URLSearchParams(params).toString();
+    
+      if (searchParams) return `/Nominationss?${searchParams}`
+
+      return `/Nominations`
     }
   }
 };

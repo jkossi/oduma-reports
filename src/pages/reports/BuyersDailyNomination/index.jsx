@@ -1,7 +1,7 @@
 import { useForm, useWatch } from "react-hook-form";
 import { format } from "date-fns";
 import useSWR from "swr";
-import { getEvents } from "~/services/reportService";
+import { getNominations, getClients } from "~/services/reportService";
 import buyersDailyNominationLogs from "~/data/buyers_daily_nomination_logs";
 import routes from "~/utils/constants/routes";
 
@@ -16,14 +16,21 @@ function BuyersDailyNomination() {
   });
 
   const { fromDate, toDate, clientId } = useWatch({ control });
+  const {data: clientData, error: clientError, isLoading: clientDataLoading } = useSWR(
+    routes.API.GET_CLIENTS(),
+    getClients
+  )
   const { data, error, isLoading } = useSWR(
     routes.API.GET_EVENTS({ fromDate, toDate, clientId }),
-    getEvents
+    getNominations
   );
 
   const onSubmit = (data) => {
     console.log(data);
   };
+
+
+  
 
   return (
     <section>
@@ -79,9 +86,11 @@ function BuyersDailyNomination() {
                 {...register("clientId")}
               >
                 <option value="">Select Client</option>
-                <option value="22">SAPP</option>
-                <option value="11">Jubilee</option>
-                <option value="p">Cenpower</option>
+                {clientData && 
+                  clientData.map(client => (
+                    <option key={client.ClientID} value={client.ClientID}>{client.ClientShortName}</option>)
+                  )
+                }
               </select>
             </div>
           </div>

@@ -99,7 +99,7 @@ function DailyGasNetworkEventLog() {
           Sorry! we have a little problem. Refresh the page and try again...
         </div>
       )}
-      {!data && (
+      {data && (
         <table className="mb-8 mt-8 table-fixed border-collapse border border-black" width="100%">
           <thead>
             <tr>
