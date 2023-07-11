@@ -1,10 +1,8 @@
 import { useForm, useWatch } from "react-hook-form";
 import { format } from "date-fns";
 import useSWR from "swr";
-import { getEvents } from "~/services/reportService";
-import networkEventLogs from "~/data/network_event_logs";
+import { getEvents, getClients } from "~/services/reportService";
 import routes from "~/utils/constants/routes";
-import { toFormData } from "axios";
 
 function DailyGasNetworkEventLog() {
   const { register, handleSubmit, control } = useForm({
@@ -17,6 +15,10 @@ function DailyGasNetworkEventLog() {
   });
 
   const { fromDate, toDate, clientId } = useWatch({ control });
+  const {data: clientData, error: clientError, isLoading: clientDataLoading } = useSWR(
+    routes.API.GET_CLIENTS(),
+    getClients
+  )
   const { data, error, isLoading } = useSWR(
     routes.API.GET_EVENTS({ fromDate, toDate, clientId }),
     getEvents
@@ -79,10 +81,12 @@ function DailyGasNetworkEventLog() {
                 className="block w-full rounded-md border-0 px-2.5 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 {...register("clientId")}
               >
-                <option value="">Select Client</option>
-                <option value="22">SAPP</option>
-                <option value="11">Jubilee</option>
-                <option value="9">Cenpower</option>
+                <option value="">{clientDataLoading ? 'Loading...' : 'Select client'}</option>
+                {clientData && !clientDataLoading && 
+                  clientData.map(client => (
+                    <option key={client.clientID} value={client.clientID}>{client.clientShortName}</option>)
+                  )
+                }
               </select>
             </div>
           </div>

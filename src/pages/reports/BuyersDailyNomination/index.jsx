@@ -2,7 +2,6 @@ import { useForm, useWatch } from "react-hook-form";
 import { format } from "date-fns";
 import useSWR from "swr";
 import { getNominations, getClients } from "~/services/reportService";
-import buyersDailyNominationLogs from "~/data/buyers_daily_nomination_logs";
 import routes from "~/utils/constants/routes";
 
 function BuyersDailyNomination() {
@@ -21,16 +20,13 @@ function BuyersDailyNomination() {
     getClients
   )
   const { data, error, isLoading } = useSWR(
-    routes.API.GET_EVENTS({ fromDate, toDate, clientId }),
+    routes.API.GET_NOMINATIONS({ fromDate, toDate, clientId }),
     getNominations
   );
 
   const onSubmit = (data) => {
     console.log(data);
   };
-
-
-  
 
   return (
     <section>
@@ -85,10 +81,10 @@ function BuyersDailyNomination() {
                 className="block w-full rounded-md border-0 px-2.5 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 {...register("clientId")}
               >
-                <option value="">Select Client</option>
-                {clientData && 
+                <option value="">{clientDataLoading ? 'Loading...' : 'Select client'}</option>
+                {clientData && !clientDataLoading && 
                   clientData.map(client => (
-                    <option key={client.ClientID} value={client.ClientID}>{client.ClientShortName}</option>)
+                    <option key={client.clientID} value={client.clientID}>{client.clientShortName}</option>)
                   )
                 }
               </select>
@@ -107,7 +103,7 @@ function BuyersDailyNomination() {
           Sorry! we have a little problem. Refresh the page and try again...
         </div>
       )}
-      {!data && (
+      {data && (
         <table className="mb-8 mt-8 table-fixed border-collapse border border-black" width="100%">
           <thead>
             <tr>
@@ -129,33 +125,35 @@ function BuyersDailyNomination() {
             </tr>
             <tr className="bg-bright-yellow text-black">
               <th className="border border-black">Date</th>
-              <th className="border border-black">Seller Request</th>
-              <th className="border border-black">Total Buyer Nomination</th>
+              <th className="border border-black">Seller Request (MMscf)</th>
+              <th className="border border-black">Total Buyer Nomination  (MMscf)</th>
               <th className="border border-black">Comments</th>
             </tr>
           </thead>
           <tbody>
-            {buyersDailyNominationLogs.map((log) => (
-              <tr key={log.eventID} className="text-center">
+            {data.map((log, index) => (
+              <tr key={index} className="text-center">
                 <td
                   className="border border-black p-0.5 text-black"
                   width="13%"
                 >
-                  {format(new Date(log.submittedDate), "dd MMM, yyyy")}
+                  {format(new Date(log.date), "dd MMM, yyyy")}
                 </td>
                 <td
                   className="border border-black p-0.5 text-black"
                   width="20%"
                 >
-                  {log.requested}
+                  {log.supplierDeclaredVolume}
                 </td>
                 <td
                   className="border border-black p-0.5 text-black"
                   width="20%"
                 >
-                  {log.estimated}
+                  {log.buyerDeclaredVolume}
                 </td>
-                <td className="border border-black p-0.5 text-black"></td>
+                <td className="border border-black p-0.5 text-black">
+                  {log.comment}
+                </td>
               </tr>
             ))}
           </tbody>

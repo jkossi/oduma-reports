@@ -28,7 +28,7 @@ const routes = {
     GET_NOMINATIONS: (params = undefined) => {
       const searchParams = new URLSearchParams(params).toString();
     
-      if (searchParams) return `/Nominationss?${searchParams}`
+      if (searchParams) return `/Nominations?${searchParams}`
 
       return `/Nominations`
     }
