@@ -1,7 +1,7 @@
 import { useForm, useWatch } from "react-hook-form";
 import { format } from "date-fns";
 import useSWR from "swr";
-import { getClients, getNominations } from "~/services/reportService";
+import { getClients, getTagPnvs } from "~/services/reportService";
 import routes from "~/utils/constants/routes";
 
 function TagPnv() {
@@ -21,7 +21,7 @@ function TagPnv() {
   )
   const { data, error, isLoading } = useSWR(
     routes.API.GET_NOMINATIONS({ fromDate, toDate, clientId }),
-    getNominations
+    getTagPnvs
   );
 
   const onSubmit = (data) => {

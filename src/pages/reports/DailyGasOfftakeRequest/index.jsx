@@ -1,7 +1,7 @@
 import { useForm, useWatch } from "react-hook-form";
 import { format } from "date-fns";
 import useSWR from "swr";
-import { getClients, getEvents } from "~/services/reportService";
+import { getClients, getGasOfftakes } from "~/services/reportService";
 // import gasOfftakeRequestLogs from "~/data/gas_offtake_request_logs";
 import routes from "~/utils/constants/routes";
 
@@ -22,7 +22,7 @@ function DailyGasOfftakeRequest() {
   )
   const { data, error, isLoading } = useSWR(
     routes.API.GET_OFFTAKE_REQUESTS({ fromDate, toDate, clientId }),
-    getEvents
+    getGasOfftakes
   );
 
   const onSubmit = (data) => {

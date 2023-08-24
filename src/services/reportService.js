@@ -18,4 +18,18 @@ async function getNominations(path) {
   return response.data;
 }
 
-export { getClients, getEvents, getNominations };
+async function getGasOfftakes(path) {
+  const response = await axios.get(path);
+
+  return response.data;
+}
+
+
+async function getTagPnvs(path) {
+  const response = await axios.get(path);
+
+  return response.data;
+}
+
+
+export { getClients, getGasOfftakes, getTagPnvs,  getEvents, getNominations };
