@@ -1,11 +1,10 @@
 import { useForm, useWatch } from "react-hook-form";
 import { format } from "date-fns";
 import useSWR from "swr";
-import { getClients, getEvents } from "~/services/reportService";
-// import gasOfftakeRequestLogs from "~/data/gas_offtake_request_logs";
+import { getClients, getNominations } from "~/services/reportService";
 import routes from "~/utils/constants/routes";
 
-function DailyGasOfftakeRequest() {
+function TagPnv() {
   const { register, handleSubmit, control } = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -21,8 +20,8 @@ function DailyGasOfftakeRequest() {
     getClients
   )
   const { data, error, isLoading } = useSWR(
-    routes.API.GET_OFFTAKE_REQUESTS({ fromDate, toDate, clientId }),
-    getEvents
+    routes.API.GET_NOMINATIONS({ fromDate, toDate, clientId }),
+    getNominations
   );
 
   const onSubmit = (data) => {
@@ -32,7 +31,7 @@ function DailyGasOfftakeRequest() {
   return (
     <section>
       <h1 className="text-2xl font-bold tracking-tight text-gray-900">
-        Gas Offtake Request
+        TAG PNV
       </h1>
       <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
         <h2 className="mb-4">Filters</h2>
@@ -108,9 +107,9 @@ function DailyGasOfftakeRequest() {
         <table className="mb-8 mt-8 table-fixed border-collapse border border-black" width="100%">
           <thead>
             <tr>
-              <th colSpan="4" className="bg-dark-blue">
+              <th colSpan="3" className="bg-dark-blue">
                 <div className="p-3 text-white">
-                  <h2 className="text-2xl">Gas Offtake Request</h2>
+                  <h2 className="text-2xl">TAG PNV</h2>
                   {fromDate && toDate && (
                     <h3>
                       (
@@ -125,38 +124,37 @@ function DailyGasOfftakeRequest() {
               </th>
             </tr>
             <tr className="bg-bright-yellow text-black">
-              <th className="border border-black" width="13%">Date</th>
-              <th className="border border-black" width="20%">
-                <p>Requested Offtake</p>
-                <p>Quantity (MMBtu)</p>
-              </th>
-              <th className="border border-black" width="20%">
-                <p>Estimated Equivalent</p>
-                <p>Volumes (MMscfd)</p>
-              </th>
-              <th className="border border-black">Comments</th>
+              <th className="border border-black" width="10%">Date</th>
+              <th className="border border-black" width="12%">PNV</th>
+              <th className="border border-black" width="78%">Planned Programs and Operations</th>
             </tr>
           </thead>
           <tbody>
-            {data.map((log) => (
-              <tr key={log.eventID} className="text-center">
-                <td className="border p-0.5 border-black text-black" width="13%">
-                  {format(new Date(log.submittedDate), "dd MMM, yyyy")}
+            {data.map((log, index) => (
+              <tr key={index} className="text-center bg-gray-400">
+                <td className="border border-black p-0.5 text-black">
+                  {format(new Date(log.date), "dd MMM, yyyy")}
                 </td>
-                <td className="border p-0.5 border-black text-black" width="20%">
-                  {log.requestedOfftakeQuantity}
+                <td className="border border-black p-0.5 text-black">
+                  {log.pnv}
                 </td>
-                <td className="border p-0.5 border-black text-black" width="20%">
-                  {log.estimatedEquivalentVolume}
+                <td className="border border-black p-0.5 text-black">
+                  {log.comment}
                 </td>
-                <td className="border p-0.5 border-black text-black">{log.comment}</td>
               </tr>
             ))}
+            <tr className="text-center">
+              <td className="font-bold border border-black p-0.5 text-black">Monthly Total</td>
+              <td className="font-bold">
+                {data.reduce((sum, log) => (sum + log.pnv), 0)}
+              </td>
+              <td className="border border-black p-0.5 text-black"></td>
+            </tr>
           </tbody>
         </table>
       )}
     </section>
-  )
+  );
 }
 
-export default DailyGasOfftakeRequest;
+export default TagPnv;

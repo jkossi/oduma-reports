@@ -26,6 +26,9 @@ function MainLayout() {
                 <Link to={routes.UI.DAILY_GAS_OFFTAKE_REQUEST()}>Daily Gas Offtake Request</Link>  
               </li>
               <li className="py-1.5">
+                <Link to={routes.UI.MONTHLY_PNV()}>Monthly PNV</Link>  
+              </li>
+              <li className="py-1.5">
                 <Link to={routes.UI.DAILY_BUYERS_NOTIFICATION()}>Daily Buyers Notification</Link>  
               </li>
               <li className="py-1.5">
@@ -36,9 +39,6 @@ function MainLayout() {
               </li>
               <li className="py-1.5">
                 <Link to={routes.UI.DAILY_GAS_OPERATIONS()}>Daily Gas Operations</Link>  
-              </li>
-              <li className="py-1.5">
-                <Link to={routes.UI.MONTHLY_PNV()}>Monthly PNV</Link>  
               </li>
             </ul>
           </nav>

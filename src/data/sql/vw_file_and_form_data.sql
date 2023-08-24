@@ -1,10 +1,22 @@
-CREATE VIEW vwFormAndFileData
+USE [Acquire]
+GO
+
+/****** Object:  View [dbo].[vwFormAndFileData]    Script Date: 8/24/2023 11:08:38 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER VIEW [dbo].[vwFormAndFileData]
 AS
 select * from (
 select
 'file' as DataSource,
 fld.FileID,
 null as FormID,
+null as FormSubID,
 fld.RecordID,
 fld.DateID,
 dat.Date,
@@ -50,6 +62,7 @@ select
 'form' as DataSource,
 null as FileID,
 frm.FormID,
+frmsub.FormID as FormSubID,
 null as RecordID,
 fmd.DateID,
 dat.Date,
@@ -91,5 +104,7 @@ left join dbo.Form frm on frm.FormID = fmsr.FormID
 left join dbo.FormSubmit frmsub on frmsub.FormID = frm.FormID
 left join dbo.RecordStatus rds on rds.RecordStatusID = fmd.RecordStatusID
 ) As FormAndFileData
+
+GO
 
 

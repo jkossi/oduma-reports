@@ -31,6 +31,20 @@ const routes = {
       if (searchParams) return `/Nominations?${searchParams}`
 
       return `/Nominations`
+    },
+    GET_OFFTAKE_REQUESTS: (params = undefined) => {
+      const searchParams = new URLSearchParams(params).toString();
+    
+      if (searchParams) return `/GasOfftakeRequests?${searchParams}`
+
+      return `/GasOfftakeRequests`
+    },
+    GET_TAG_PNVS: (params = undefined) => {
+      const searchParams = new URLSearchParams(params).toString();
+    
+      if (searchParams) return `/GetTagPnvs?${searchParams}`
+
+      return `/GetTagPnvs`
     }
   }
 };
