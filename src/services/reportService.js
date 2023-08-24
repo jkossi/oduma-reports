@@ -31,5 +31,10 @@ async function getTagPnvs(path) {
   return response.data;
 }
 
+async function getDcvDeclarations(path) {
+  const response = await axios.get(path);
 
-export { getClients, getGasOfftakes, getTagPnvs,  getEvents, getNominations };
+  return response.data;
+}
+
+export { getClients, getDcvDeclarations, getGasOfftakes, getTagPnvs,  getEvents, getNominations };

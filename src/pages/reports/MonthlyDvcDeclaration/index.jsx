@@ -1,7 +1,7 @@
 import { useForm, useWatch } from "react-hook-form";
 import { format } from "date-fns";
 import useSWR from "swr";
-import { getClients, getNominations } from "~/services/reportService";
+import { getClients, getDcvDeclarations } from "~/services/reportService";
 import routes from "~/utils/constants/routes";
 
 function MonthlyDvcDeclaration() {
@@ -20,8 +20,8 @@ function MonthlyDvcDeclaration() {
     getClients
   )
   const { data, error, isLoading } = useSWR(
-    routes.API.GET_NOMINATIONS({ fromDate, toDate, clientId }),
-    getNominations
+    routes.API.GET_DCV_DECALRATIONS({ fromDate, toDate, clientId }),
+    getDcvDeclarations
   );
 
   const onSubmit = (data) => {
@@ -136,7 +136,7 @@ function MonthlyDvcDeclaration() {
                   {format(new Date(log.date), "dd MMM, yyyy")}
                 </td>
                 <td className="border border-black p-0.5 text-black">
-                  {log.buyerDeclaredVolume}
+                  {log.dcv}
                 </td>
                 <td className="border border-black p-0.5 text-black">
                   {log.comment}
@@ -146,7 +146,7 @@ function MonthlyDvcDeclaration() {
             <tr className="text-center">
               <td className="font-bold border border-black p-0.5 text-black">Total</td>
               <td className="font-bold">
-                {data.reduce((sum, log) => (sum + log.buyerDeclaredVolume), 0)}
+                {data.reduce((sum, log) => (sum + log.dcv), 0)}
               </td>
               <td className="border border-black p-0.5 text-black"></td>
             </tr>

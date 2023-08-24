@@ -35,17 +35,25 @@ const routes = {
     GET_OFFTAKE_REQUESTS: (params = undefined) => {
       const searchParams = new URLSearchParams(params).toString();
     
-      if (searchParams) return `/GasOfftakeRequests?${searchParams}`
+      if (searchParams) return `/GasOfftakeRequest?${searchParams}`
 
-      return `/GasOfftakeRequests`
+      return `/GasOfftakeRequest`
     },
     GET_TAG_PNVS: (params = undefined) => {
       const searchParams = new URLSearchParams(params).toString();
     
-      if (searchParams) return `/GetTagPnvs?${searchParams}`
+      if (searchParams) return `/TagPnv?${searchParams}`
 
-      return `/GetTagPnvs`
+      return `/TagPnv`
+    },
+    GET_DCV_DECALRATIONS: (params = undefined) => {
+      const searchParams = new URLSearchParams(params).toString();
+    
+      if (searchParams) return `/DcvDeclarationS?${searchParams}`
+
+      return `/DcvDeclarations`
     }
+
   }
 };
   
